@@ -38,17 +38,36 @@ class Lunch {
   };
 
   //CRUD Operations
+
+  //Create
   newLunch(Lunch newLunch) async {
     final db = await database;
     var res = await db.insert("Lunch", newLunch.toMap());
     return res;
   }
-
+  //Read
   getLunch(int id) async {
     final db = await database;
-    var res =await  db.query("Client", where: "id = ?", whereArgs: [id]);
-    return res.isNotEmpty ? Client.fromMap(res.first) : Null ;
+    var res =await  db.query("Lunch", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Lunch.fromMap(res.first) : Null ;
+  }
+  //Update
+  updateLunch(Lunch newLunch) async {
+    final db = await database;
+    var res = await db.update("Lunch", newLunch.toMap(),
+        where: "id = ?", whereArgs: [newLunch.id]);
+    return res;
   }
 
+  //Delete
+  deleteLunch(int id) async {
+    final db = await database;
+    db.delete("Lunch", where: "id = ?", whereArgs: [id]);
+  }
+
+  deleteAll() async {
+    final db = await database;
+    db.rawDelete("Delete * from Lunch");
+  }
 
 }
