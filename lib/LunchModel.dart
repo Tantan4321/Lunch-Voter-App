@@ -1,7 +1,7 @@
 /// LunchModel.dart
 import 'dart:convert';
-import 'package:sqflite/sqflite.dart';
 
+import 'package:flutter_lunch_voter/Database.dart';
 
 Lunch clientFromJson(String str) {
   final jsonData = json.decode(str);
@@ -25,35 +25,36 @@ class Lunch {
   });
 
   factory Lunch.fromMap(Map<String, dynamic> json) => new Lunch(
-    id: json["id"],
-    food: json["food"],
-    price: json["price"],
-
-  );
+        id: json["id"],
+        food: json["food"],
+        price: json["price"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "id": id,
-    "food": food,
-    "price": price,
-  };
+        "id": id,
+        "food": food,
+        "price": price,
+      };
 
   //CRUD Operations
 
   //Create
   newLunch(Lunch newLunch) async {
-    final db = await database;
+    final db = await DBProvider.db.database;
     var res = await db.insert("Lunch", newLunch.toMap());
     return res;
   }
+
   //Read
   getLunch(int id) async {
-    final db = await database;
-    var res =await  db.query("Lunch", where: "id = ?", whereArgs: [id]);
-    return res.isNotEmpty ? Lunch.fromMap(res.first) : Null ;
+    final db = await DBProvider.db.database;
+    var res = await db.query("Lunch", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Lunch.fromMap(res.first) : Null;
   }
+
   //Update
   updateLunch(Lunch newLunch) async {
-    final db = await database;
+    final db = await DBProvider.db.database;
     var res = await db.update("Lunch", newLunch.toMap(),
         where: "id = ?", whereArgs: [newLunch.id]);
     return res;
@@ -61,13 +62,12 @@ class Lunch {
 
   //Delete
   deleteLunch(int id) async {
-    final db = await database;
+    final db = await DBProvider.db.database;
     db.delete("Lunch", where: "id = ?", whereArgs: [id]);
   }
 
   deleteAll() async {
-    final db = await database;
+    final db = await DBProvider.db.database;
     db.rawDelete("Delete * from Lunch");
   }
-
 }
