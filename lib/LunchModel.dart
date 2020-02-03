@@ -1,5 +1,7 @@
 /// LunchModel.dart
 import 'dart:convert';
+import 'package:sqflite/sqflite.dart';
+
 
 Lunch clientFromJson(String str) {
   final jsonData = json.decode(str);
@@ -14,8 +16,7 @@ String clientToJson(Lunch data) {
 class Lunch {
   int id;
   String food;
-  float price;
-
+  double price;
 
   Lunch({
     this.id,
@@ -35,4 +36,19 @@ class Lunch {
     "food": food,
     "price": price,
   };
+
+  //CRUD Operations
+  newLunch(Lunch newLunch) async {
+    final db = await database;
+    var res = await db.insert("Lunch", newLunch.toMap());
+    return res;
+  }
+
+  getLunch(int id) async {
+    final db = await database;
+    var res =await  db.query("Client", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Client.fromMap(res.first) : Null ;
+  }
+
+
 }
