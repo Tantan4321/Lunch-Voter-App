@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
@@ -11,13 +9,11 @@ class DBProvider {
 
   static final DBProvider db = DBProvider._();
 
-
   static Database _database;
 
 //TODO: Name of database subject to change
   Future<Database> get database async {
-    if (_database != null)
-      return _database;
+    if (_database != null) return _database;
 
     // if _database is null we instantiate it
     _database = await initDB();
@@ -26,16 +22,14 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentsDirectory.path, "TestDB.db");
-    return await openDatabase(path, version: 1,
-        onOpen: (db) {},
+    String path = "${documentsDirectory.path}/TestDB.db";
+    return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-          await db.execute(
-              "CREATE TABLE Lunch ("
-                  "id INTEGER PRIMARY KEY,"
-                  "food TEXT,"
-                  "price REAL,"
-                  ")");
-        });
+      await db.execute("CREATE TABLE Lunch ("
+          "id INTEGER PRIMARY KEY,"
+          "food TEXT,"
+          "price REAL,"
+          ")");
+    });
   }
 }
