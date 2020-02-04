@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    DBProvider.db.insertDog(lunch);
+    DBProvider.db.getLunch(id);
   }
 
   @override

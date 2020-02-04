@@ -6,6 +6,8 @@ import 'dart:core';
 
 import 'LunchModel.dart';
 
+const String DBNAME = "lunches";
+
 class DBProvider {
   DBProvider._();
 
@@ -27,7 +29,7 @@ class DBProvider {
     String path = "${documentsDirectory.path}/TestDB.db";
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE lunch ("
+      await db.execute("CREATE TABLE $DBNAME ("
           "id INTEGER PRIMARY KEY,"
           "food TEXT,"
           "price REAL,"
@@ -35,19 +37,67 @@ class DBProvider {
     });
   }
 
-
-  Future<void> insertDog(Lunch lunch) async {
-    // Get a reference to the database.
+  //
+  //Used to be future in the example
+  void insertLunch(Lunch lunch) async {
     final Database db = await database;
 
-    // Insert the Dog into the correct table. Also specify the
-    // `conflictAlgorithm`. In this case, if the same dog is inserted
-    // multiple times, it replaces the previous data.
     await db.insert(
-      'lunch',
+      '$DBNAME',
       lunch.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
 
+//Retrieve Garbage methods
+
+  ///Retrieve all lunches from the database and return as List
+  Future<List<Lunch>> getLunches() async {
+    final Database db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('$DBNAME');
+
+    return List.generate(maps.length, (i) {
+      return Lunch(
+        id: maps[i]['id'],
+        food: maps[i]['food'],
+        price: maps[i]['price'],
+      );
+    });
+  }
+
+  /// Retrieve Singular Lunch
+  Future<Lunch> getLunch(int id) async {
+    final db = await database;
+    var res = await db.query("$DBNAME", where: "id = ?", whereArgs: [id]);
+    return res.isNotEmpty ? Lunch.fromJson(res.first) : Null;
+  }
+
+  //Update Garbage Stuff
+
+  ///Updates Lunch Entry
+  Future<void> updateLunch(Lunch lunch) async {
+    final db = await database;
+    await db.update(
+      '$DBNAME',
+      lunch.toMap(),
+      where: "id = ?",
+      whereArgs: [lunch.id], //prevents SQL injection - we are anti-vaxx
+    );
+  }
+
+  ///Delete Lunch
+  void deleteLunch(int id) async {
+    final db = await database;
+
+    await db.delete(
+      '$DBNAME',
+      where: "id = ?",
+      whereArgs: [id],
+    );
+  }
+
+  void deleteAll() async {
+    final db = await DBProvider.db.database;
+    db.rawDelete("Delete * from $DBNAME");
+  }
 }
