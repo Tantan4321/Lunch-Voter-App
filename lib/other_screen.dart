@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'Database.dart';
 import 'LunchModel.dart';
 
+import 'dart:math';
+
 class SecondPage extends StatefulWidget {
   SecondPage({Key key, this.title}) : super(key: key);
 
@@ -42,7 +44,7 @@ class _SecondPageState extends State<SecondPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          Lunch rnd = DBProvider.db.testLunches[math.Random().nextInt(DBProvider.db.testLunches.length)];
+          Lunch rnd = DBProvider.db.testLunches[Random().nextInt(DBProvider.db.testLunches.length)];
           await DBProvider.db.insertLunch(rnd);
           setState(() {});
         },
