@@ -6,21 +6,19 @@ import 'LunchModel.dart';
 
 import 'dart:math';
 
-class SecondPage extends StatefulWidget {
-  SecondPage({Key key, this.title}) : super(key: key);
-
-  final String title;
+class OtherPage extends StatefulWidget {
+  OtherPage({Key key}) : super(key: key);
 
   @override
-  _SecondPageState createState() => _SecondPageState();
+  _OtherPageState createState() => _OtherPageState();
 }
 
-class _SecondPageState extends State<SecondPage> {
+class _OtherPageState extends State<OtherPage> {
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter SQLite")),
+      appBar: AppBar(title: Text("Flutter SQLite Test")),
       body: FutureBuilder<List<Lunch>>(
         future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
