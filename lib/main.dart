@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
-    DBProvider.db.getLunch(id);
+    //DBProvider.db.getLunch(id);
   }
 
   @override
