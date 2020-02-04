@@ -1,7 +1,7 @@
 /// LunchModel.dart
 import  'dart:convert';
 
-import 'package:flutter_lunch_voter/DBProvider.dart';
+import 'package:flutter_lunch_voter/Database.dart';
 import 'package:sqflite/sqflite.dart';
 
 Lunch clientFromJson(String str) {
