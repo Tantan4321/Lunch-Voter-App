@@ -29,11 +29,7 @@ class DBProvider {
     String path = "${documentsDirectory.path}/TestDB.db";
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE $DBNAME ("
-          "id INTEGER PRIMARY KEY,"
-          "food TEXT,"
-          "price REAL,"
-          ")");
+      await db.execute("CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL)");
     });
   }
 

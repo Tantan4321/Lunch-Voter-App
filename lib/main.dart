@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            SecondPage(title: "Second Page")));
+                            OtherPage()));
               },
             )
           ],
