@@ -42,11 +42,13 @@ class _SecondPageState extends State<SecondPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          Lunch rnd = testLunches[math.Random().nextInt(testLunches.length)];
+          Lunch rnd = DBProvider.db.testLunches[math.Random().nextInt(DBProvider.db.testLunches.length)];
           await DBProvider.db.insertLunch(rnd);
           setState(() {});
         },
       ),
     );
+
+
   }
 }

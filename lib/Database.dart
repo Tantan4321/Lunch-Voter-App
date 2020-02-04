@@ -100,4 +100,10 @@ class DBProvider {
     final db = await DBProvider.db.database;
     db.rawDelete("Delete * from $DBNAME");
   }
+
+  List<Lunch> testLunches = [
+    Lunch(food: "Cardboard Pizza", price: 3.00,),
+    Lunch(food: "Cheese Bites sans cheese", price: 4.00,),
+    Lunch(food: "Irresistable Orange Chicken", price: 5.00,),
+  ];
 }
