@@ -20,7 +20,7 @@ class _SecondPageState extends State<SecondPage> {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter SQLite")),
       body: FutureBuilder<List<Lunch>>(
-        future: DBProvider.db.getAllClients(),
+        future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(
@@ -28,15 +28,9 @@ class _SecondPageState extends State<SecondPage> {
               itemBuilder: (BuildContext context, int index) {
                 Lunch item = snapshot.data[index];
                 return ListTile(
-                  title: Text(item.lastName),
+                  title: Text(item.food),
                   leading: Text(item.id.toString()),
-                  trailing: Checkbox(
-                    onChanged: (bool value) {
-                      DBProvider.db.blockClient(item);
-                      setState(() {});
-                    },
-                    value: item.blocked,
-                  ),
+                  trailing: Text(item.price.toString()),
                 );
               },
             );
@@ -48,8 +42,8 @@ class _SecondPageState extends State<SecondPage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () async {
-          Client rnd = testClients[math.Random().nextInt(testClients.length)];
-          await DBProvider.db.newClient(rnd);
+          Lunch rnd = testLunches[math.Random().nextInt(testLunches.length)];
+          await DBProvider.db.insertLunch(rnd);
           setState(() {});
         },
       ),
