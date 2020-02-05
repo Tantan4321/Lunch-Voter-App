@@ -18,7 +18,7 @@ class _OtherPageState extends State<OtherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Flutter SQLite Test")),
+      appBar: AppBar(title: Text("School Food Generator")),
       body: FutureBuilder<List<Lunch>>(
         future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
