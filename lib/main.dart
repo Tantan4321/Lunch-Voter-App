@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(fontSize: 40.0, color: Colors.green),
             ),
             NiceButton(
-              text: "Open New Screen",
+              text: "Open the Database",
               radius: 40,
               padding: EdgeInsets.all(15),
               background: Colors.teal,
