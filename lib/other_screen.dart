@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_lunch_voter/lunch_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'DBProvider.dart';
@@ -62,90 +64,12 @@ class _OtherPageState extends State<OtherPage> {
                 child: Icon(Icons.add_box),
                 label: "Insert Own Lunch",
                 onTap: () async {
-                  Future<String> _asyncInputDialog(BuildContext context) async {
-                    String lunchName = '';
-                    String lunchPrice = '';
-                    return showDialog<String>(
-                      context: context,
-                      barrierDismissible: false, // dialog is dismissible with a tap on the barrier
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text('Enter Lunch'),
-                          content: new Row(
-                            children: <Widget>[
-                              new Expanded(
-                                  child: new TextField(
-                                    autofocus: true,
-                                    decoration: new InputDecoration(labelText: 'Lunch Name', hintText: 'Plastic Gyros'),
-                                    onChanged: (value) {
-                                      lunchName = value;
-                                    },
-                                  )
-                              ),
-                              new Expanded(
-                                  child: new TextField(
-                                    autofocus: true,
-                                    decoration: new InputDecoration(labelText: 'Lunch Price', hintText: 'Plastic Gyros'),
-                                    onChanged: (value) {
-                                      lunchPrice = value;
-                                    },
-                                  )
-                              )
-                            ],
-                          ),
-                          actions : <Widget>[
-                            FlatButton(
-                              child: Text('Ok'),
-                              onPressed: () async {
-                                Navigator.of(context).pop(lunchName);
-                                Navigator.of(context).pop(lunchPrice);
-                                //TODO: Make new method that takes strings as parameters
-                                await DBProvider.db.insertOneLunch(lunchName, lunchPrice);
-                                setState(() {});
-                              },
-                            ),
-                          ],
-                        );
-                      },
-                    );
-                  }
+                  final Map<String, dynamic> dialogResults = jsonDecode(await lunchDialog(context));
+                  DBProvider.db.insertOneLunch(dialogResults["name"], dialogResults["price"]);
+                  setState(() {});
                 })
           ]),
 
     );
   }
-}
-//implement this alert dialog
-Future<String> _asyncInputDialog(BuildContext context) async {
-  String teamName = '';
-  return showDialog<String>(
-    context: context,
-    barrierDismissible: false, // dialog is dismissible with a tap on the barrier
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: Text('Enter current team'),
-        content: new Row(
-          children: <Widget>[
-            new Expanded(
-                child: new TextField(
-                  autofocus: true,
-                  decoration: new InputDecoration(
-                      labelText: 'Team Name', hintText: 'eg. Juventus F.C.'),
-                  onChanged: (value) {
-                    teamName = value;
-                  },
-                ))
-          ],
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () {
-              Navigator.of(context).pop(teamName);
-            },
-          ),
-        ],
-      );
-    },
-  );
 }

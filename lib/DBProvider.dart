@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'dart:io';
 
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -14,19 +15,17 @@ class DBProvider {
   static final DBProvider db = DBProvider._();
 
   static Database _database;
-
-//TODO: Name of database subject to change
   Future<Database> get database async {
     if (_database != null) return _database;
 
-    // if _database is null we instantiate it
+    // lazily instantiate the db the first time it is accessed
     _database = await initDB();
     return _database;
   }
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = "${documentsDirectory.path}/TestDB.db";
+    String path = join(documentsDirectory.path, "TestDB.db");
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(
@@ -47,17 +46,14 @@ class DBProvider {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+
   //TODO : Finish method
   /// Insert lunch with two string parameters: lunchName and lunchPrice
   void insertOneLunch(String lunchName, String lunchPrice) async {
     final Database db = await database;
-    await db.rawInsert(
-        "INSERT INTO $DBNAME (food, price) VALUES($lunchName, $lunchPrice)"
-    );
+    await db.rawInsert("INSERT INTO $DBNAME(food, price) VALUES(?, ?)",
+        [lunchName, lunchPrice]);
   }
-
-
-
 
 //Retrieve Garbage methods
 
