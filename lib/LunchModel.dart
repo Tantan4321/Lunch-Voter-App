@@ -1,8 +1,5 @@
 /// LunchModel.dart
-import  'dart:convert';
-
-import 'package:flutter_lunch_voter/DBProvider.dart';
-import 'package:sqflite/sqflite.dart';
+import 'dart:convert';
 
 Lunch clientFromJson(String str) {
   final jsonData = json.decode(str);

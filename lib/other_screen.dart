@@ -1,11 +1,10 @@
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'DBProvider.dart';
 import 'LunchModel.dart';
-
-import 'dart:math';
 
 class OtherPage extends StatefulWidget {
   OtherPage({Key key}) : super(key: key);
@@ -15,7 +14,6 @@ class OtherPage extends StatefulWidget {
 }
 
 class _OtherPageState extends State<OtherPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,35 +37,28 @@ class _OtherPageState extends State<OtherPage> {
             return Center(child: CircularProgressIndicator());
           }
         },
-
       ),
-
-
       floatingActionButton: SpeedDial(
-        closeManually: true,
+          closeManually: true,
           animatedIcon: AnimatedIcons.menu_close,
           children: [
-          SpeedDialChild(
-            child: Icon(Icons.add),
-            label: "Add a Random Lunch",
-            onTap: () async {
-              Lunch rnd = DBProvider.db.testLunches[Random().nextInt(DBProvider.db.testLunches.length)];
-              await DBProvider.db.insertLunch(rnd);
-              setState(() {});
-            }
-          ),
+            SpeedDialChild(
+                child: Icon(Icons.add),
+                label: "Add a Random Lunch",
+                onTap: () async {
+                  Lunch rnd = DBProvider.db.testLunches[
+                      Random().nextInt(DBProvider.db.testLunches.length)];
+                  await DBProvider.db.insertLunch(rnd);
+                  setState(() {});
+                }),
             SpeedDialChild(
                 child: Icon(Icons.delete),
                 label: "Delete All Lunches",
                 onTap: () async {
                   await DBProvider.db.deleteAll();
-                }
-            )
-        ]
-      ),
-
+                  setState(() {});
+                })
+          ]),
     );
-
-
   }
 }

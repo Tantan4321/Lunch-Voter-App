@@ -1,8 +1,8 @@
+import 'dart:core';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'dart:core';
 
 import 'LunchModel.dart';
 
@@ -29,7 +29,8 @@ class DBProvider {
     String path = "${documentsDirectory.path}/TestDB.db";
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute("CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL)");
+      await db.execute(
+          "CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL)");
     });
   }
 
@@ -94,12 +95,21 @@ class DBProvider {
 
   void deleteAll() async {
     final db = await database;
-    db.rawDelete("Delete * from $DBNAME");
+    db.rawDelete("DELETE FROM $DBNAME");
   }
 
   List<Lunch> testLunches = [
-    Lunch(food: "Cardboard Pizza", price: 3.00,),
-    Lunch(food: "Cheese Bites sans cheese", price: 4.00,),
-    Lunch(food: "Irresistable Orange Chicken", price: 5.00,),
+    Lunch(
+      food: "Cardboard Pizza",
+      price: 3.00,
+    ),
+    Lunch(
+      food: "Cheese Bites sans cheese",
+      price: 4.00,
+    ),
+    Lunch(
+      food: "Irresistable Orange Chicken",
+      price: 5.00,
+    ),
   ];
 }

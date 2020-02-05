@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_lunch_voter/DBProvider.dart';
 import 'package:flutter_lunch_voter/other_screen.dart';
 import 'package:nice_button/nice_button.dart';
 
@@ -61,11 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: EdgeInsets.all(15),
               background: Colors.teal,
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            OtherPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => OtherPage()));
               },
             )
           ],
