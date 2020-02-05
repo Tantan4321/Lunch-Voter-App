@@ -36,6 +36,8 @@ class DBProvider {
 
   //
   //Used to be future in the example
+
+  ///Inserts Lunch object
   void insertLunch(Lunch lunch) async {
     final Database db = await database;
 
@@ -45,6 +47,17 @@ class DBProvider {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+  //TODO : Finish method
+  /// Insert lunch with two string parameters: lunchName and lunchPrice
+  void insertOneLunch(String lunchName, String lunchPrice) async {
+    final Database db = await database;
+    await db.rawInsert(
+        "INSERT INTO $DBNAME (food, price) VALUES($lunchName, $lunchPrice)"
+    );
+  }
+
+
+
 
 //Retrieve Garbage methods
 
