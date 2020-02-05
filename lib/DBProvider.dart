@@ -93,7 +93,7 @@ class DBProvider {
   }
 
   void deleteAll() async {
-    final db = await DBProvider.db.database;
+    final db = await database;
     db.rawDelete("Delete * from $DBNAME");
   }
 
