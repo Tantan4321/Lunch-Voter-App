@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_lunch_voter/lunch_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 import 'DBProvider.dart';
@@ -57,8 +59,17 @@ class _OtherPageState extends State<OtherPage> {
                 onTap: () async {
                   await DBProvider.db.deleteAll();
                   setState(() {});
+                }),
+            SpeedDialChild(
+                child: Icon(Icons.add_box),
+                label: "Insert Own Lunch",
+                onTap: () async {
+                  final Map<String, dynamic> dialogResults = jsonDecode(await lunchDialog(context));
+                  DBProvider.db.insertOneLunch(dialogResults["name"], dialogResults["price"]);
+                  setState(() {});
                 })
           ]),
+
     );
   }
 }

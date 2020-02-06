@@ -34,11 +34,13 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-
+#Run this stuff so that it updates
+#flutter pub get
+#flutter pub run flutter_launcher_icons:main
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/icon/ReimuAsBurger.jpg"
+  image_path: "assets/icon/RemiliaEatingBurger.jfif"
 
 
 # For information on the generic Dart part of this file, see the
@@ -55,6 +57,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/icon/ReimuAsBurger.jpg
+    - assets/icon/RemiliaEatingBurger.jfif
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
