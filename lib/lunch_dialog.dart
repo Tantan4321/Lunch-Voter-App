@@ -48,7 +48,7 @@ Future<String> lunchDialog(BuildContext context) async {
             child: Text('Ok'),
             onPressed: () {
               Navigator.pop(context,
-                  jsonEncode({"name": lunchName, "price": lunchPrice}));
+                  jsonEncode({"food": lunchName, "price": lunchPrice}));
             },
           ),
         ],
