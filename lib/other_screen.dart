@@ -66,8 +66,7 @@ class _OtherPageState extends State<OtherPage> {
                 child: Icon(Icons.add_box),
                 label: "Insert Own Lunch",
                 onTap: () async {
-                  final Map<String, dynamic> dialogResults = jsonDecode(await lunchDialog(context));
-                  DBProvider.db.insertOneLunch(dialogResults["name"], dialogResults["price"]);
+                  DBProvider.db.insertLunch(clientFromJson(await lunchDialog(context)));
                   setState(() {});
                 })
           ]),

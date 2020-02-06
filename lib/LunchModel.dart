@@ -12,15 +12,26 @@ String clientToJson(Lunch data) {
 }
 
 class Lunch {
-  final int id;
-  final String food;
-  final double price;
+  int id;
+  String food;
+  double price;
 
-  Lunch({
-    this.id,
-    this.food,
-    this.price,
-  });
+  Lunch({var id, var food, var price}){
+    this.id = id;
+    if(food == null || food.length == 0){
+      this.food = "No name given";
+    }else{
+      this.food = food;
+    }
+    price = double.tryParse(price.toString());
+    if(price != null){
+      this.price = price;
+    }else{
+      this.price = 0.0;
+    }
+  }
+
+
 
   factory Lunch.fromJson(Map<String, dynamic> json) => new Lunch(
         id: json["id"],
