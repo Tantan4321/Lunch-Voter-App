@@ -30,6 +30,7 @@ Future<String> lunchDialog(BuildContext context) async {
               ),
               Expanded(
                 child: TextField(
+                  keyboardType: TextInputType.number,
                   autofocus: false,
                   decoration: InputDecoration(
                       labelText: 'Lunch Price',
