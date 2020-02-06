@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_lunch_voter/lunch_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:intl/intl.dart';
 
 import 'DBProvider.dart';
 import 'LunchModel.dart';
@@ -18,6 +19,7 @@ class OtherPage extends StatefulWidget {
 class _OtherPageState extends State<OtherPage> {
   @override
   Widget build(BuildContext context) {
+    final oCcy = new NumberFormat.simpleCurrency();
     return Scaffold(
       appBar: AppBar(title: Text("School Food Generator")),
       body: FutureBuilder<List<Lunch>>(
@@ -31,7 +33,7 @@ class _OtherPageState extends State<OtherPage> {
                 return ListTile(
                   title: Text(item.food),
                   leading: Text(item.id.toString()),
-                  trailing: Text(item.price.toString()),
+                  trailing: Text(oCcy.format(item.price)),
                 );
               },
             );
