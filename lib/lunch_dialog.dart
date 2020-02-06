@@ -22,7 +22,7 @@ Future<String> lunchDialog(BuildContext context) async {
                   autofocus: false,
                   decoration: InputDecoration(
                       labelText: 'Lunch Name',
-                      hintText: 'Plastic Gyros'),
+                      hintText: 'e.g. Plastic Gyros'),
                   onChanged: (value) {
                     lunchName = value;
                   },
@@ -34,7 +34,7 @@ Future<String> lunchDialog(BuildContext context) async {
                   autofocus: false,
                   decoration: InputDecoration(
                       labelText: 'Lunch Price',
-                      hintText: '2.00'),
+                      hintText: 'e.g. 2.00'),
                   onChanged: (value) {
                     lunchPrice = value;
                   },
