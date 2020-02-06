@@ -14,27 +14,31 @@ Future<String> lunchDialog(BuildContext context) async {
         title: Text('Enter Lunch'),
         content: Container(
           height: MediaQuery.of(context).size.height / 4,
-          child: new Column(
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
-                  child: new TextField(
-                autofocus: false,
-                decoration: new InputDecoration(
-                    labelText: 'Lunch Name', hintText: 'Plastic Gyros'),
-                onChanged: (value) {
-                  lunchName = value;
-                },
-              )),
+                child: TextField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                      labelText: 'Lunch Name',
+                      hintText: 'Plastic Gyros'),
+                  onChanged: (value) {
+                    lunchName = value;
+                  },
+                )
+              ),
               Expanded(
-                  child: new TextField(
-                autofocus: false,
-                decoration: new InputDecoration(
-                    labelText: 'Lunch Price', hintText: '2.00'),
-                onChanged: (value) {
-                  lunchPrice = value;
-                },
-              ))
+                child: TextField(
+                  autofocus: false,
+                  decoration: InputDecoration(
+                      labelText: 'Lunch Price',
+                      hintText: '2.00'),
+                  onChanged: (value) {
+                    lunchPrice = value;
+                  },
+                )
+              )
             ],
           ),
         ),
