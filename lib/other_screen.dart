@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_lunch_voter/deletion_dialog.dart';
 import 'package:flutter_lunch_voter/lunch_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intl/intl.dart';
@@ -39,7 +40,11 @@ class _OtherPageState extends State<OtherPage> {
                     Lunch newLunch = clientFromJson(await lunchDialog(context));
                     await DBProvider.db.updateLunch(item, newLunch);
                     setState(() {});
-                  }
+                  },
+                  onLongPress:() async{
+                    await deleteDialog(context, item.id);
+                    setState(() {});
+                  },
                 );
               },
             );
