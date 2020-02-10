@@ -32,8 +32,14 @@ class _OtherPageState extends State<OtherPage> {
                 Lunch item = snapshot.data[index];
                 return ListTile(
                   title: Text(item.food),
-                  leading: Text(item.id.toString()),
+                    subtitle: Text("Order #" + item.id.toString()) ,
+                  leading: Icon(Icons.fastfood),
                   trailing: Text(oCcy.format(item.price)),
+                  onTap: () async {
+                    Lunch newLunch = clientFromJson(await lunchDialog(context));
+                    await DBProvider.db.updateLunch(item, newLunch);
+                    setState(() {});
+                  }
                 );
               },
             );

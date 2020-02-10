@@ -81,14 +81,17 @@ class DBProvider {
   //Update Garbage Stuff
 
   ///Updates Lunch Entry
-  Future<void> updateLunch(Lunch lunch) async {
-    final db = await database;
-    await db.update(
-      '$DBNAME',
-      lunch.toMap(),
-      where: "id = ?",
-      whereArgs: [lunch.id], //prevents SQL injection - we are anti-vaxx
-    );
+  Future<void> updateLunch(Lunch lunch, Lunch newLunch) async {
+    if (newLunch.food != "No name given") {
+      final Database db = await database;
+      newLunch.id = lunch.id;
+      await db.update(
+        '$DBNAME',
+        newLunch.toMap(),
+        where: "id = ?",
+        whereArgs: [lunch.id], //prevents SQL injection - we are anti-vaxx
+      );
+    }
   }
 
   ///Delete Lunch
