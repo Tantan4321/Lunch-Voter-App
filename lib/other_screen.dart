@@ -35,7 +35,7 @@ class _OtherPageState extends State<OtherPage> {
                   leading: Text(item.id.toString()),
                   trailing: Text(oCcy.format(item.price)),
                   onTap: () async {
-                    DBProvider.db.updateLunch(item, clientFromJson(await lunchDialog(context)));
+                    await DBProvider.db.updateLunch(item, clientFromJson(await lunchDialog(context)));
                     setState(() {});
                   }
                 );

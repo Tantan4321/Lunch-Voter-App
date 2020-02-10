@@ -82,7 +82,9 @@ class DBProvider {
 
   ///Updates Lunch Entry
   Future<void> updateLunch(Lunch lunch, Lunch newLunch) async {
-    final db = await database;
+    final Database db = await database;
+
+    newLunch.id = lunch.id;
     await db.update(
       '$DBNAME',
       newLunch.toMap(),
