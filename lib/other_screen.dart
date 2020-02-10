@@ -34,6 +34,10 @@ class _OtherPageState extends State<OtherPage> {
                   title: Text(item.food),
                   leading: Text(item.id.toString()),
                   trailing: Text(oCcy.format(item.price)),
+                  onTap: () async {
+                    DBProvider.db.updateLunch(item, clientFromJson(await lunchDialog(context)));
+                    setState(() {});
+                  }
                 );
               },
             );
