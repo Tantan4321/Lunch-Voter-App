@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_lunch_voter/other_screen.dart';
 import 'package:nice_button/nice_button.dart';
 
+import 'SlideLeftRoute.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -61,7 +63,7 @@ class _MyHomePageState extends State<MyHomePage> {
               background: Colors.teal,
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => OtherPage()));
+                    SlideLeftRoute(page: OtherPage()));
               },
             )
           ],
