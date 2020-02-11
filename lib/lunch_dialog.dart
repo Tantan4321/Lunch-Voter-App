@@ -39,7 +39,10 @@ Future<String> lunchDialog(BuildContext context) async {
                     lunchPrice = value;
                   },
                 )
-              )
+              ),
+              Expanded(
+                //TODO: This is where the epic code goes for the star rating system. EPIC!!!
+              ),
             ],
           ),
         ),
