@@ -33,7 +33,8 @@ class _OtherPageState extends State<OtherPage> {
                 Lunch item = snapshot.data[index];
                 return ListTile(
                   title: Text(item.food),
-                    subtitle: Text("Order #" + item.id.toString()) ,
+                    subtitle: Text("Rating: " + item.rating.toString()) ,
+
                   leading: Icon(Icons.fastfood),
                   trailing: Text(oCcy.format(item.price)),
                   onTap: () async {

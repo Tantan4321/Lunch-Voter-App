@@ -15,7 +15,7 @@ class Lunch {
   int id;
   String food;
   double price;
-  int rating;
+  double rating;
 
   Lunch({var id, var food, var price, var rating}){
     this.id = id;
@@ -30,7 +30,7 @@ class Lunch {
     }else{
       this.price = 0.0;
     }
-    rating = int.tryParse(rating.toString());
+    rating = double.tryParse(rating.toString());
     if(rating != null){
       this.rating = price;
     }else{
