@@ -15,8 +15,9 @@ class Lunch {
   int id;
   String food;
   double price;
+  double rating;
 
-  Lunch({var id, var food, var price}){
+  Lunch({var id, var food, var price, var rating}){
     this.id = id;
     if(food == null || food.length == 0){
       this.food = "No name given";
@@ -29,6 +30,12 @@ class Lunch {
     }else{
       this.price = 0.0;
     }
+    rating = double.tryParse(rating.toString());
+    if(rating != null){
+      this.rating = rating;
+    }else{
+      this.rating = null;
+    }
   }
 
 
@@ -37,11 +44,13 @@ class Lunch {
         id: json["id"],
         food: json["food"],
         price: json["price"],
+        rating: json["rating"],
       );
 
   Map<String, dynamic> toMap() => {
         "id": id,
         "food": food,
         "price": price,
+        "rating": rating,
       };
 }

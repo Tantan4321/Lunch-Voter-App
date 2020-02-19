@@ -29,7 +29,7 @@ class DBProvider {
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(
-          "CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL)");
+          "CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL, rating REAL)");
     });
   }
 
@@ -49,10 +49,10 @@ class DBProvider {
 
   //TODO : Finish method
   /// Insert lunch with two string parameters: lunchName and lunchPrice
-  void insertOneLunch(String lunchName, String lunchPrice) async {
+  void insertOneLunch(String lunchName, String lunchPrice, String lunchRating) async {
     final Database db = await database;
-    await db.rawInsert("INSERT INTO $DBNAME(food, price) VALUES(?, ?)",
-        [lunchName, lunchPrice]);
+    await db.rawInsert("INSERT INTO $DBNAME(food, price, rating) VALUES(?, ?, ?)",
+        [lunchName, lunchPrice, lunchRating]);
   }
 
 //Retrieve Garbage methods
@@ -67,6 +67,7 @@ class DBProvider {
         id: maps[i]['id'],
         food: maps[i]['food'],
         price: maps[i]['price'],
+        rating: maps[i]['rating'],
       );
     });
   }
@@ -82,16 +83,26 @@ class DBProvider {
 
   ///Updates Lunch Entry
   Future<void> updateLunch(Lunch lunch, Lunch newLunch) async {
-    if (newLunch.food != "No name given") {
       final Database db = await database;
-      newLunch.id = lunch.id;
+
+      //Dirty Checking: Test if any of the field have been modified
+      if (newLunch.food != "No name given"){
+        lunch.food = newLunch.food;
+      }
+      if (newLunch.price != 0.0){
+        lunch.price = newLunch.price;
+      }
+      if (newLunch.rating != null){
+        lunch.rating = newLunch.rating;
+      }
+
       await db.update(
         '$DBNAME',
-        newLunch.toMap(),
+        lunch.toMap(),
         where: "id = ?",
-        whereArgs: [lunch.id], //prevents SQL injection - we are anti-vaxx
+        whereArgs: [lunch.id],
       );
-    }
+
   }
 
   ///Delete Lunch
@@ -114,14 +125,17 @@ class DBProvider {
     Lunch(
       food: "Cardboard Pizza",
       price: 3.00,
+      rating: 3,
     ),
     Lunch(
       food: "Cheese Bites sans cheese",
       price: 4.00,
+      rating: 2,
     ),
     Lunch(
       food: "Irresistable Orange Chicken",
       price: 5.00,
+      rating: 4,
     ),
   ];
 }

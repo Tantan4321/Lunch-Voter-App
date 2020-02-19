@@ -22,7 +22,7 @@ class _OtherPageState extends State<OtherPage> {
   Widget build(BuildContext context) {
     final oCcy = new NumberFormat.simpleCurrency();
     return Scaffold(
-      appBar: AppBar(title: Text("School Food Generator")),
+      appBar: AppBar(title: Text("School Food Database")),
       body: FutureBuilder<List<Lunch>>(
         future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
@@ -33,7 +33,8 @@ class _OtherPageState extends State<OtherPage> {
                 Lunch item = snapshot.data[index];
                 return ListTile(
                   title: Text(item.food),
-                    subtitle: Text("Order #" + item.id.toString()) ,
+                    subtitle: Text("Rating: " + item.rating.toString()) ,
+
                   leading: Icon(Icons.fastfood),
                   trailing: Text(oCcy.format(item.price)),
                   onTap: () async {
