@@ -32,9 +32,9 @@ class Lunch {
     }
     rating = double.tryParse(rating.toString());
     if(rating != null){
-      this.rating = price;
+      this.rating = rating;
     }else{
-      this.rating = 0;
+      this.rating = 0.0;
     }
   }
 

@@ -29,7 +29,7 @@ class DBProvider {
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(
-          "CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL)");
+          "CREATE TABLE $DBNAME(id INTEGER PRIMARY KEY, food TEXT, price REAL, rating REAL)");
     });
   }
 
@@ -125,7 +125,7 @@ class DBProvider {
     Lunch(
       food: "Irresistable Orange Chicken",
       price: 5.00,
-      rating: 9,
+      rating: 4,
     ),
   ];
 }
