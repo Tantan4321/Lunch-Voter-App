@@ -22,7 +22,7 @@ class _OtherPageState extends State<OtherPage> {
   Widget build(BuildContext context) {
     final oCcy = new NumberFormat.simpleCurrency();
     return Scaffold(
-      appBar: AppBar(title: Text("School Food Generator")),
+      appBar: AppBar(title: Text("School Food Database")),
       body: FutureBuilder<List<Lunch>>(
         future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
