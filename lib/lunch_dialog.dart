@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
+//TODO: give it an optional parameter to take a  lunch object or to create a lunch object if none is given
 Future<String> lunchDialog(BuildContext context) async {
   String lunchName = '';
   String lunchPrice = '';
@@ -39,18 +39,18 @@ Future<String> lunchDialog(BuildContext context) async {
                 },
               )),
               Expanded(
-                  //TODO: This is where the epic code goes for the star rating system. EPIC!!!
                   child: RatingBar(
-                initialRating: 3,
-                minRating: 1,
-                direction: Axis.horizontal,
-                allowHalfRating: true,
-                itemCount: 5,
-                itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
-                itemBuilder: (context, _) => Icon(
-                  Icons.star,
-                  color: Colors.amber,
-                ),
+                    //TODO: make initial ID the rating of the ID
+                    initialRating: 0,
+                    minRating: 1,
+                    direction: Axis.horizontal,
+                    allowHalfRating: true,
+                    itemCount: 5,
+                    itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                    itemBuilder: (context, _) => Icon(
+                      Icons.star,
+                      color: Colors.amber,
+                    ),
                 onRatingUpdate: (rating) {
                   lunchRating = rating.toString();
                 },

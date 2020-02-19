@@ -83,16 +83,26 @@ class DBProvider {
 
   ///Updates Lunch Entry
   Future<void> updateLunch(Lunch lunch, Lunch newLunch) async {
-    if (newLunch.food != "No name given") {
       final Database db = await database;
-      newLunch.id = lunch.id;
+
+      //Dirty Checking: Test if any of the field have been modified
+      if (newLunch.food != "No name given"){
+        lunch.food = newLunch.food;
+      }
+      if (newLunch.price != 0.0){
+        lunch.price = newLunch.price;
+      }
+      if (newLunch.rating != null){
+        lunch.rating = newLunch.rating;
+      }
+
       await db.update(
         '$DBNAME',
-        newLunch.toMap(),
+        lunch.toMap(),
         where: "id = ?",
-        whereArgs: [lunch.id], //prevents SQL injection - we are anti-vaxx
+        whereArgs: [lunch.id],
       );
-    }
+
   }
 
   ///Delete Lunch
