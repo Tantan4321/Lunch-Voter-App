@@ -34,7 +34,7 @@ class Lunch {
     if(rating != null){
       this.rating = rating;
     }else{
-      this.rating = 0.0;
+      this.rating = null;
     }
   }
 
