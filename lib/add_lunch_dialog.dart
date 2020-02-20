@@ -4,7 +4,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 //TODO: give it an optional parameter to take a  lunch object or to create a lunch object if none is given
-Future<String> lunchDialog(BuildContext context) async {
+
+Future<String> AddLunchDialog(BuildContext context) async {
   String lunchName = '';
   String lunchPrice = '';
   String lunchRating = '';
@@ -46,7 +47,9 @@ Future<String> lunchDialog(BuildContext context) async {
                     direction: Axis.horizontal,
                     allowHalfRating: true,
                     itemCount: 5,
+                    itemSize: 30,
                     itemPadding: EdgeInsets.symmetric(horizontal: 5.0),
+                    glowColor: Colors.blue,
                     itemBuilder: (context, _) => Icon(
                       Icons.star,
                       color: Colors.amber,

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_lunch_voter/deletion_dialog.dart';
-import 'package:flutter_lunch_voter/lunch_dialog.dart';
+import 'package:flutter_lunch_voter/add_lunch_dialog.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:intl/intl.dart';
 
@@ -23,7 +23,8 @@ class _OtherPageState extends State<OtherPage> {
     final oCcy = new NumberFormat.simpleCurrency();
     return Scaffold(
       appBar: AppBar(title: Text("School Food Database")),
-      body: FutureBuilder<List<Lunch>>(
+      body:
+        FutureBuilder<List<Lunch>>(
         future: DBProvider.db.getLunches(),
         builder: (BuildContext context, AsyncSnapshot<List<Lunch>> snapshot) {
           if (snapshot.hasData) {
@@ -38,7 +39,7 @@ class _OtherPageState extends State<OtherPage> {
                   leading: Icon(Icons.fastfood),
                   trailing: Text(oCcy.format(item.price)),
                   onTap: () async {
-                    Lunch newLunch = clientFromJson(await lunchDialog(context));
+                    Lunch newLunch = clientFromJson(await AddLunchDialog(context));
                     await DBProvider.db.updateLunch(item, newLunch);
                     setState(() {});
                   },
@@ -78,7 +79,7 @@ class _OtherPageState extends State<OtherPage> {
                 child: Icon(Icons.add_box),
                 label: "Insert Own Lunch",
                 onTap: () async {
-                  DBProvider.db.insertLunch(clientFromJson(await lunchDialog(context)));
+                  DBProvider.db.insertLunch(clientFromJson(await AddLunchDialog(context)));
                   setState(() {});
                 })
           ]),
