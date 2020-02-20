@@ -32,7 +32,15 @@ class _OtherPageState extends State<OtherPage> {
               itemCount: snapshot.data.length,
               itemBuilder: (BuildContext context, int index) {
                 Lunch item = snapshot.data[index];
-                return ListTile(
+                return Container(
+                    margin:EdgeInsets.all(5.0),
+                    padding: EdgeInsets.all(16.0),
+
+                    decoration: BoxDecoration(
+                      color: Colors.lightBlue[100],
+                      borderRadius: BorderRadius.circular(30)
+                    ),
+                child: ListTile(
                   title: Text(item.food),
                     subtitle: Text("Rating: " + item.rating.toString()) ,
 
@@ -47,6 +55,7 @@ class _OtherPageState extends State<OtherPage> {
                     await deleteDialog(context, item.id);
                     setState(() {});
                   },
+                )
                 );
               },
             );
